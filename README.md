@@ -5,12 +5,13 @@ Java client for the [Lightning Charge REST API](https://github.com/ElementsProje
 I'm working on it...
 
 ### By yourself
-Clone and build, then add `target/lightning-charge-client-1.0.jar` to your project.
-```bash
-    git clone https://github.com/rodolfoguinez/lightning-charge-client-java.git
-    cd lightning-charge-client-java
-    mvn clean package
-```
+1. Clone and build, skipping tests.
+    ```bash
+        git clone https://github.com/rodolfoguinez/lightning-charge-client-java.git
+        cd lightning-charge-client-java
+        mvn clean package -Dmaven.test.skip=true
+    ```
+2. Then add `target/lightning-charge-client-1.0.jar` to your project.
 
 ##Use
 ### Creating the client object
@@ -69,7 +70,7 @@ lightningClient.setLogger(logger);
   ```
 * Get all the invoices
     ```java
-    List<Invoice> invoiceList = client.getInvoiceList();
+    List<Invoice> invoiceList = lightningClient.getInvoiceList();
     //...
     ```
 ### Receive payments
