@@ -7,16 +7,15 @@ import org.junit.Test;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
+
 public class LightningChargeClientTest {
     @Test
     public void restTest() throws InterruptedException {
-        Logger logger = LogManager.getLogger(LightningChargeClientTest.class);
+        Logger logger = LogManager.getLogger("dsfa");
         Gson gson = new Gson();
-        PaymentEventHandler paymentEventHandler = new PaymentEventHandler() {
-            @Override
-            public void onPaymentReceived(Invoice invoice) {
-                System.out.println("New payment received: " + invoice);
-            }
+        PaymentEventHandler paymentEventHandler = (Invoice invoice) -> {
+            System.out.println("New payment received: " + invoice.getId());
         };
 
         LightningChargeClient client = new LightningChargeClient(
@@ -26,9 +25,15 @@ public class LightningChargeClientTest {
                 "asd123",
                 paymentEventHandler);
         client.start();
+        client.setLogger(logger);
         Info info = client.getInfo();
         System.out.println(gson.toJson(info));
         client.postEmptyInvoice();
+
+        Invoice invoice = new Invoice();
+        invoice.setCurrency("USD");
+        invoice.setMsatoshi("10");
+        List<Invoice> invoiceList = client.getInvoiceList();
 
         Thread.sleep(10000);
     }
