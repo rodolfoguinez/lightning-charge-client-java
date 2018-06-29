@@ -13,7 +13,7 @@ I'm working on it...
     ```
 2. Then add `target/lightning-charge-client-1.0.jar` to your project.
 
-##Use
+## Use
 ### Creating the client object
 Create a handler for the payments received. Then create the client library object, providing the `host`, `port`, `user` and `password` of your [Lightning Charge](https://github.com/ElementsProject/lightning-charge), and the payment handler.
 
